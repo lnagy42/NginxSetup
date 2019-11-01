@@ -1,0 +1,4 @@
+- hosts: devops-dev
+  any_errors_fatal: true
+  roles:
+    - roles: dev

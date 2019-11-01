@@ -1,0 +1,19 @@
+---
+- name: Install basic packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - nginx
+      - phpmyadmin
+      - php7.0
+      - php7.0-fpm
+  notify:
+      - Start Nginx
+
+- name: Remove default configuration file
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- include_tasks: vhost.dev.yml

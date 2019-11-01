@@ -1,0 +1,18 @@
+- name: Setup nginx conf for devops-dev
+  template:
+    src: nginxdev.conf
+    dest: /etc/nginx/sites-available/devops-dev.datadome.co
+  register: conf
+
+- name: Enable Nginx configuration
+  file:
+    src: /etc/nginx/sites-available/devops-dev.datadome.co
+    dest: /etc/nginx/sites-enabled/devops-dev.datadome.co
+    state: link
+
+- name : Restart Nginx after config check
+  command: "nginx -t -c /etc/nginx/sites-available/devops-dev.datadome.co"
+  register: result
+  failed_when: "result.rc != 0"
+  notify: Restart Nginx
+  when: conf.changed

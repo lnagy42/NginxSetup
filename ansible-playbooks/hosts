@@ -1,0 +1,7 @@
+[devops-prod]
+x.x.x.x devops-production.datadome.co
+devops-production.datadome.co
+
+[devops-dev]
+x.x.x.x devops-dev.datadome.co
+devops-dev.datadome.co

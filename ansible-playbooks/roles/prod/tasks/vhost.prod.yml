@@ -1,0 +1,19 @@
+---
+- name: Setup nginx conf for devops-prod
+  template:
+    src: nginxprod.conf
+    dest: /etc/nginx/sites-available/devops-production.datadome.co
+  register: conf
+
+- name: Enable Nginx configuration
+  file:
+    src: /etc/nginx/sites-available/devops-production.datadome.co
+    dest: /etc/nginx/sites-enabled/devops-production.datadome.co
+    state: link
+
+- name : Restart Nginx after config check
+  command: "nginx -t -c /etc/nginx/sites-available/devops-production.datadome.co"
+  register: result
+  failed_when: "result.rc != 0"
+  notify : Restart Nginx
+  when: conf.changed

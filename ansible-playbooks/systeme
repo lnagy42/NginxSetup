@@ -1,0 +1,33 @@
+III/ NORDVpn
+La cle prive du certificat ssl de NORDVpn a fuité, et un groupe s'est fait passé pour NORDVpn et à ainsi vole beaucoup de données utilisateurs
+
+IV/ Questions systèmes
+
+    1) Citez les codes HTTP que vous connaissez et expliquez ce qu'ils représentent
+1xx : En attente de traitement supplementaire
+200 : requete recue
+2xx : Requête bien traitée
+301 : redirection permanente, les ressources sont à une nouvelle adresse
+404 : Page Not Found (problème côté utilisateur)
+405 : Method Not Allowed 
+502 : Bad Gateway 
+5xx : problèmes côté serveur
+
+    2) Citez quelques commandes linux pour diagnostiquer l'état de santé d'un serveur (espace disque, utilisation cpu...)
+Top, lsof, netstat, ps, tcpdump, iostat, ldd, vmstat
+
+    3) Citez quelques serveur web/proxy du marché
+nginx, apache, nodejs, lighttpd
+
+    4) Citez les méthodes HTTP que vous connaissez
+POST GET DELETE PUT CONNECT PATCH
+
+    5) Quel protocole est utilisé par Ansible pour déployer sa configuration
+ssh
+
+    6) Qu'est ce que l'iowait sur un serveur linux? Comment le mesure t-on, avec quel outil?
+C'est le temps d'attente du cpu avant de lancer un process I/O.
+outils : iostat -x
+
+    7) DNS: quelle est la différence entre un record de type A et un type CNAME?
+Les CNAME font des liens entre des noms de domaines entre eux tandis que les A relient un nom de domaine à une ip.
