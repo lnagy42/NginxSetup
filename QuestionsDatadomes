@@ -1,3 +1,22 @@
+
+II/ Test d'architecture
+    But : Proposer une solution à un problème de scalabilité.
+
+    Contraintes :
+         DataDome héberge sa solution de détection temps réel chez Online.net sur des serveurs dédiés, cette détection en temps réel stateless est appelée via le DNS api-datadome.co par les modules DataDome installés chez ses clients.
+api-datadome.co est ouvert sur les ports 8443 (TCP sécurisé) pour le module HAProxy et 443(HTTPS) pour le reste des modules (apache, nginx, IIS...).
+        Les appels au DNS api-datadome.co redirigent vers les 12 serveurs d'API exposés via des IPs publiques.
+         Pour l'exercice, on suppose que nos serveurs sont actuellement uniquement déployés chez Online.net.
+
+     Questions :
+         1) Nos clients ont besoin de laisser passer le trafic à destination de nos serveurs (api.datadome.co), quelle est la meilleure façon de traiter ce besoin ? Quels seraient les impacts sur notre architecture physique ?
+
+Les apis de data dome étant sécurisées, le client peut whitelister librement les apis sans crainte. 
+
+         2) Un nouveau client va mettre en place notre solution sur ses serveurs. Ce client engendre un trafic, très variable dans le temps, de 20K hits par secondes en moyenne (soit 50% de notre trafic supposé actuel). Que mettre en place pour assurer le bon traitement de ce trafic, sans perte de qualité de service sur nos clients actuels et en assurant une fiabilité optimale ?
+
+Si l'entreprise a des fonds à dépenser, migrer votre infrastructure sur du k8s qui vous offrira toute la scalabilite horizontale demandée. Si ce n'est pas le cas, une solution serait de brider le nombres d'appels possible du gros client en mettant un limitation-rate, ou bien de lui demander d'étaler ses appels dans le temps.
+
 III/ NORDVpn
 La cle prive du certificat ssl de NORDVpn a fuité, et un groupe s'est fait passé pour NORDVpn et à ainsi vole beaucoup de données utilisateurs
 
